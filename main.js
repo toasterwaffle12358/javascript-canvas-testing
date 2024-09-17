@@ -48,6 +48,7 @@ function draw() {
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
     console.log("drawn")
+    requestAnimationFrame(draw)
 
 }
 
@@ -65,7 +66,8 @@ canvas.addEventListener('mousemove', (event) => {
     */
 });
 
-setInterval(draw, 10);
+//setInterval(draw, 10);
+
 
 
 canvas.addEventListener('mousedown', () => {
@@ -74,4 +76,5 @@ canvas.addEventListener('mousedown', () => {
     highContrast = !highContrast
 })
 
-draw()
+//draw()
+requestAnimationFrame(draw)
