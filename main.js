@@ -34,7 +34,7 @@ function draw() {
     
     
     ctx.fillStyle = `hsl(${hue} 100% 80%)`
-    ctx.fillRect(mouseX, mouseY, 70, 70);
+    ctx.fillRect(mouseX-35, mouseY-35, 70, 70);
     ctx.fillStyle = "rgb( 0 0 0";
     ctx.fillRect(WIDTH/2, HEIGHT/2, 1, 1);
     if (highContrast == false) {
@@ -45,8 +45,8 @@ function draw() {
     let tempcanvas = canvas
     ctx.drawImage(canvas, -WIDTH*0.003, -HEIGHT*0.003, WIDTH*1.006, HEIGHT*1.006)
     //ctx.drawImage(canvas, 0, 0, WIDTH, HEIGHT)
-    //ctx.filter = "blur(10px) brightness(100%) opacity(75%)"
-    //ctx.drawImage(tempcanvas, -WIDTH*0.003, -HEIGHT*0.003, WIDTH*1.006, HEIGHT*1.006)
+    ctx.filter = "blur(10px) brightness(100%) opacity(75%)"
+    ctx.drawImage(tempcanvas, -WIDTH*0.003, -HEIGHT*0.003, WIDTH*1.006, HEIGHT*1.006)
     ctx.filter = "none"
 
     console.log("function ran")
