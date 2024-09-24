@@ -83,6 +83,16 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault(); // Prevent scrolling
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // Prevent scrolling
+});
+
+
+
 
 
 requestAnimationFrame(draw)
