@@ -84,6 +84,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 canvas.addEventListener('touchstart', (event) => {
+    mousePosListX = []
+    mousePosListY = []
     event.preventDefault(); // Prevent scrolling
     MouseDownPos = 1
 });
