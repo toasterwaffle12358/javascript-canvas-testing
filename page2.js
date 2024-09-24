@@ -83,12 +83,13 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-canvas.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // Prevent scrolling
+canvas.addEventListener('touchstart', (event) => {
+    event.preventDefault(); // Prevent scrolling
 });
 
-canvas.addEventListener('touchmove', (e) => {
-    e.preventDefault(); // Prevent scrolling
+canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault(); // Prevent scrolling
+    updateMousePosition(event);
 });
 
 
