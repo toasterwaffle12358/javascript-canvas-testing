@@ -84,11 +84,14 @@ canvas.addEventListener('mousedown', () => {
 
 canvas.addEventListener('touchstart', (event) => {
     event.preventDefault(); // Prevent scrolling
+    highContrast = !highContrast
 });
 canvas.addEventListener('touchmove', (event) => {
     event.preventDefault(); // Prevent scrolling
     const touch = event.touches[0];
     updateMousePosition(touch);
+    hue = hue +5
+    hue = hue%360
 });
 
 //draw()
