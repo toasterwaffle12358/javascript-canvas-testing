@@ -93,6 +93,9 @@ canvas.addEventListener('touchmove', (event) => {
     const touch = event.touches[0];
     updateMousePosition(touch);
 });
+canvas.addEventListener('touchend', () => {
+    MouseDownPos = 0
+});
 
 
 

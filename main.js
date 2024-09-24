@@ -82,5 +82,14 @@ canvas.addEventListener('mousedown', () => {
     highContrast = !highContrast
 })
 
+canvas.addEventListener('touchstart', (event) => {
+    event.preventDefault(); // Prevent scrolling
+});
+canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault(); // Prevent scrolling
+    const touch = event.touches[0];
+    updateMousePosition(touch);
+});
+
 //draw()
 requestAnimationFrame(draw)
