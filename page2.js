@@ -60,6 +60,9 @@ function draw() {
                 ctx.stroke()
             }
         }
+    } else {
+        mousePosListX = []
+        mousePosListY = []
     }
     requestAnimationFrame(draw)
 }
@@ -97,6 +100,8 @@ canvas.addEventListener('touchmove', (event) => {
 });
 canvas.addEventListener('touchend', () => {
     MouseDownPos = 0
+    mousePosListX = []
+    mousePosListY = []
 });
 
 
