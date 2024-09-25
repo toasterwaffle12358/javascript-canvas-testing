@@ -14,8 +14,11 @@ let oldMouseX1 = 0;
 let oldMouseY1 = 0;
 let mousePosListX = []
 let mousePosListY = []
+let pastPosListsX = [[0]]
+let pastPosListsY = [[0]]
 
 var MouseDownPos = 0;
+let listcounter1 = 0;
 
 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -53,17 +56,41 @@ function updateMousePosition(event) {
     mousePosListX.push(mouseX)
     mousePosListY.push(mouseY)
 
+    /*
     if ( mousePosListX.length >= 50) {
         mousePosListX.shift()
         mousePosListY.shift()
     }
+    */
 
 }
 
 
 function draw() {
-
     if (MouseDownPos == 1) {
+        ctx.fillStyle = "rgb(255 255 255)"
+        ctx.fillRect(0, 0, WIDTH, HEIGHT)
+        listcounter1 = 0
+        for (strokeX in pastPosListsX) {
+            for (point in pastPosListsX[strokeX]) {
+                for (let i = 0; i <= 5; i++ ) {
+                    ctx.beginPath()
+                    ctx.moveTo(pastPosListsX[strokeX][point-i], pastPosListsY[strokeX][point-i]);
+                    ctx.lineTo(pastPosListsX[strokeX][point-1], pastPosListsY[strokeX][point-1])
+                    ctx.stroke()
+                    for (j in mousePosListX) {
+                        for (let k = 0; k <= 5; k++ ) {
+                            ctx.beginPath()
+                            ctx.moveTo(mousePosListX[j-k], mousePosListY[j-k]);
+                            ctx.lineTo(mousePosListX[j-1], mousePosListY[j-1])
+                            ctx.stroke()
+                        }
+                    }
+                }
+            }
+        }
+
+        /*
         for (i in mousePosListX) {
             for (let j = 0; j <= 5; j++ ) {
                 ctx.beginPath()
@@ -72,6 +99,8 @@ function draw() {
                 ctx.stroke()
             }
         }
+        */
+
     } else {
         mousePosListX = []
         mousePosListY = []
@@ -83,6 +112,8 @@ function draw() {
 //runs whenever the desktop mouse is moved
 canvas.addEventListener('mousemove', (event) => {
     updateMousePosition(event);
+    //pastPosListsX.push(mousePosListX)
+    //pastPosListsY.push(mousePosListY)
 });
 
 
@@ -96,12 +127,20 @@ canvas.addEventListener('mousedown', () => {
 
 canvas.addEventListener('mouseup', () => {
     MouseDownPos = 0
+
+    mousePosListX = []
+    mousePosListY = []
+    //console.log(pastPosListsX.length)
 })
 
 //clears screen when "c" key is pressed
 document.addEventListener('keydown', (event) => {
     if (event.key === 'c') {
         clearScreen()
+    }
+    if (event.key === 'b') {
+        mousePosListX.pop()
+        mousePosListY.pop()
     }
 });
 
@@ -127,6 +166,8 @@ canvas.addEventListener('touchmove', (event) => {
 });
 canvas.addEventListener('touchend', () => {
     MouseDownPos = 0
+    pastPosListsX.push(mousePosListX)
+    pastPosListsY.push(mousePosListY)
     mousePosListX = []
     mousePosListY = []
 });
