@@ -16,6 +16,15 @@ ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
 let highContrast = false
 
+const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+if (/android|iPhone|iPad|iPod|opera mini|IEMobile|WPDesktop/i.test(userAgent)) {
+    console.log("user is on mobile")
+    document.getElementById("change_mode_button").style.display = "block"
+}
+
+
+
 function updateMousePosition(event) {
     const rect = canvas.getBoundingClientRect();
     mouseX = event.clientX - rect.left;
@@ -84,7 +93,6 @@ canvas.addEventListener('mousedown', () => {
 
 canvas.addEventListener('touchstart', (event) => {
     event.preventDefault(); // Prevent scrolling
-    highContrast = !highContrast
 });
 canvas.addEventListener('touchmove', (event) => {
     event.preventDefault(); // Prevent scrolling
@@ -94,5 +102,9 @@ canvas.addEventListener('touchmove', (event) => {
     hue = hue%360
 });
 
-//draw()
+function changeMode() {
+    highContrast = !highContrast
+}
+
+
 requestAnimationFrame(draw)

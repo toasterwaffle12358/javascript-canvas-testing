@@ -60,3 +60,17 @@ a {
     border: 2px solid rgb(24, 24, 24);
     display:none;
 }
+.change_mode_button {
+    position: fixed;
+    background-color: rgb(14, 14, 14);
+    z-index: 5;
+    height: 100px;
+    width: 90%;
+    bottom: 3%;
+    margin-left: 5%;
+    text-align: center;
+    font-size: 500%;
+    border: 2px solid rgb(228, 228, 228);
+    display: none;
+    color: white;
+}
