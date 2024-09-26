@@ -27,8 +27,13 @@
         </div>
     </div>
     <body>
-        <div class="reset_button" type="button" onclick="clearScreen()" id="reset_button">
-            CLEAR SCREEN
+        <div class="bottom_bar_container">
+            <div class="reset_button" type="button" onclick="clearScreen()" id="reset_button">
+                CLEAR
+            </div>
+            <div class="undo_button" type="button" onclick="undoStroke()" id="undo_button">
+                UNDO
+            </div>
         </div>
         <canvas id="canvas"></canvas>
         <script type="text/javascript" src="page2.js"></script>
