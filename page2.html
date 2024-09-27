@@ -7,7 +7,9 @@
     <div class="navbarcontainer">
         <div class="navbar">
             <div class="navbaritem">
-                <a href="index.html"> page 1</a>
+                <a href="index.html"> 
+                    <img src="resources/page1_icon.png" class="navbar_link_image">
+                </a>
             </div>
             <div class="navbaritem currentpage">
                 page 2
@@ -25,8 +27,13 @@
                 hello
             </div>
         </div>
+        <div class="slider_container">
+            <input type="range" min="1" max="50" value="5" class="slider" id="webbyness_slider">
+        </div>
     </div>
     <body>
+        <div class="side_bar_container">
+        </div>
         <div class="bottom_bar_container">
             <div class="reset_button" type="button" onclick="clearScreen()" id="reset_button">
                 CLEAR

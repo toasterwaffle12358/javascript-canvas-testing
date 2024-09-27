@@ -8,44 +8,27 @@ ctx.canvas.height = HEIGHT
 
 let mouseX = 0;
 let mouseY = 0;
-let oldMouseX = 0;
-let oldMouseY = 0;
-let oldMouseX1 = 0;
-let oldMouseY1 = 0;
 let mousePosListX = []
 let mousePosListY = []
 let pastPosListsX = [[0]]
 let pastPosListsY = [[0]]
 
 var MouseDownPos = 0;
-let listcounter1 = 0;
 
 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+let userIsMobile = false
+let hasCleared = false
+
+let webbyness_slider = document.getElementById('webbyness_slider')
 
 
 //drawing the clear screen instructions image for desktop users
 
 if (/android|iPhone|iPad|iPod|opera mini|IEMobile|WPDesktop/i.test(userAgent)) {
-    console.log("user is on mobile")
     document.getElementById("reset_button").style.display = "block"
     document.getElementById("undo_button").style.display = "block"
-} else {
-    const img = new Image();
-    img.src = "resources/page2_instructions.png";
-
-    img.onload = () => {
-    const maxWidth = WIDTH * 0.5;
-    const aspectRatio = img.width / img.height;
-    
-    let drawWidth, drawHeight;
-
-    drawWidth = Math.min(maxWidth, img.width);
-    drawHeight = drawWidth / aspectRatio;
-
-    ctx.drawImage(img, ((WIDTH - drawWidth)/2), ((HEIGHT - drawHeight)/2), drawWidth, drawHeight);
-    };
+    userIsMobile = true
 }
-
 
 //creating a variable for the current mouse position, but also a list with the last 50 mouse positions
 function updateMousePosition(event) {
@@ -70,10 +53,24 @@ function updateMousePosition(event) {
 function draw() {
     ctx.fillStyle = "rgb(255 255 255)"
     ctx.fillRect(0, 0, WIDTH, HEIGHT)
-    listcounter1 = 0
+
+    if (userIsMobile == false && hasCleared == false) {
+        const img = new Image();
+        img.src = "resources/page2_instructions.png";
+        const maxWidth = WIDTH * 0.5;
+        const aspectRatio = img.width / img.height;
+        
+        let drawWidth, drawHeight;
+
+        drawWidth = Math.min(maxWidth, img.width);
+        drawHeight = drawWidth / aspectRatio;
+
+        ctx.drawImage(img, ((WIDTH - drawWidth)/2), ((HEIGHT - drawHeight)/2), drawWidth, drawHeight);
+    };
+
     for (strokeX in pastPosListsX) {
         for (point in pastPosListsX[strokeX]) {
-            for (let i = 0; i <= 5; i++ ) {
+            for (let i = 0; i <= webbyness_slider.value; i++ ) {
                 ctx.beginPath()
                 ctx.moveTo(pastPosListsX[strokeX][point-i], pastPosListsY[strokeX][point-i]);
                 ctx.lineTo(pastPosListsX[strokeX][point-1], pastPosListsY[strokeX][point-1])
@@ -83,7 +80,7 @@ function draw() {
         }
     }
     for (j in mousePosListX) {
-        for (let k = 0; k <= 5; k++ ) {
+        for (let k = 0; k <= webbyness_slider.value; k++ ) {
             ctx.beginPath()
             ctx.moveTo(mousePosListX[j-k], mousePosListY[j-k]);
             ctx.lineTo(mousePosListX[j-1], mousePosListY[j-1])
@@ -141,6 +138,7 @@ function clearScreen() {
     mousePosListY = []
     pastPosListsX = [[0]]
     pastPosListsY = [[0]]
+    hasCleared = true
 }
 function undoStroke() {
     mousePosListX = []

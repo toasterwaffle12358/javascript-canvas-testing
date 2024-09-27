@@ -32,7 +32,7 @@ function updateMousePosition(event) {
 }
 
 function draw() {
-
+    console.log(WIDTH)
 
     /*
     for (let i = 0; i < 100; i++) {
