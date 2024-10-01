@@ -111,8 +111,11 @@ a {
     width: 400px;
     margin: 10px;
     align-self: center;
+    background-color: aqua;
 }
 .navbar_link_image {
     width: 64px;
-
+}
+.slider_container {
+    width: 0px;
 }
