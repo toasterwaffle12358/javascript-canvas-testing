@@ -76,6 +76,7 @@ canvas.addEventListener('touchmove', (event) => {
     event.preventDefault(); // Prevent scrolling
     const touch = event.touches[0];
     updateMousePosition(touch);
+    MouseDownPos = 0
 });
 
 document.addEventListener('touchmove', (event) => {
