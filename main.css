@@ -119,3 +119,6 @@ a {
 .slider_container {
     width: 0px;
 }
+.nocursor {
+    cursor: none;
+}
