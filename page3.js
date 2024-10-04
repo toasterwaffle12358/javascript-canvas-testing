@@ -33,8 +33,9 @@ function updateMousePosition(event) {
 }
 
 function draw() {
-    ctx.filter = "contrast(100%) hue-rotate(19deg) invert(1)"
+    ctx.filter = "contrast(101%) hue-rotate(50deg) invert(1) saturate(120%)"
     ctx.lineWidth = 50;
+    ctx.stokeStyle = "rgb( 0 12 0)"
     ctx.beginPath()
     ctx.moveTo(mousePosListX[0], mousePosListY[0]);
     for (i in mousePosListX) {
@@ -47,8 +48,8 @@ function draw() {
     ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2, mouseX, mouseY)
 
-    ctx.fillStyle = "rgb( 255 400 300 / 10%";
-    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    //ctx.fillStyle = "rgb( 255 400 300 / 10%";
+    //ctx.fillRect(0, 0, WIDTH, HEIGHT);
     requestAnimationFrame(draw)
 }
 
@@ -57,9 +58,9 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 canvas.addEventListener('mousedown', () => {
-    ctx.fillStyle = "rgb( 255 255 255";
+    ctx.fillStyle = "rgb( 255 250 255";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
-    MouseDownPos = 1
+    //MouseDownPos = 1
 })
 
 canvas.addEventListener('mouseup', () => {
