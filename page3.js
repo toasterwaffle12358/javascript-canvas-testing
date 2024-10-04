@@ -33,7 +33,7 @@ function updateMousePosition(event) {
 }
 
 function draw() {
-    ctx.filter = "contrast(101%) hue-rotate(50deg) invert(1) saturate(120%)"
+    ctx.filter = "contrast(101%) hue-rotate(5deg) invert(1) saturate(120%)"
     ctx.lineWidth = 50;
     ctx.stokeStyle = "rgb( 0 12 0)"
     ctx.beginPath()
@@ -85,6 +85,8 @@ document.addEventListener('touchmove', (event) => {
 document.addEventListener('gesturestart', (event) => {
 }, { passive: false });
 document.addEventListener('touchstart', (event) => {
+    ctx.fillStyle = "rgb( 255 250 255";
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
 }, { passive: false });
 
 
