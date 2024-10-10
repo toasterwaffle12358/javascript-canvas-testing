@@ -6,27 +6,26 @@ const HEIGHT = window.innerHeight
 ctx.canvas.width = WIDTH
 ctx.canvas.height = HEIGHT
 
-let mouseX = 0;
-let mouseY = 0;
+let mouseX = WIDTH/2;
+let mouseY = HEIGHT/2;
 
 var MouseDownPos = 0;
 
-let mousePosListX = []
-let mousePosListY = []
 canvas.requestPointerLock();
 
 function updateMousePosition(event) {
     const rect = canvas.getBoundingClientRect();
-    mouseX = event.clientX - rect.left;
-    mouseY = event.clientY - rect.top;
-    if (MouseDownPos == 1) {
-        mousePosListX.push(mouseX)
-        mousePosListY.push(mouseY)
-    }
+    //mouseX = event.clientX - rect.left;
+    //mouseY = event.clientY - rect.top;
 
-    if ( mousePosListX.length >= 100) {
-        mousePosListX.shift()
-        mousePosListY.shift()
+    mouseX += event.movementX
+    mouseY += event.movementY
+
+    if (mouseX >= WIDTH-1) {
+        mouseX = WIDTH-1
+    }
+    if (mouseY >= HEIGHT-10) {
+        mouseY = HEIGHT-10
     }
 
 
@@ -34,19 +33,12 @@ function updateMousePosition(event) {
 
 function draw() {
     ctx.filter = "contrast(101%) hue-rotate(5deg) invert(1) saturate(120%)"
-    ctx.lineWidth = 50;
-    ctx.stokeStyle = "rgb( 0 12 0)"
-    ctx.beginPath()
-    ctx.moveTo(mousePosListX[0], mousePosListY[0]);
-    for (i in mousePosListX) {
-        ctx.lineTo(mousePosListX[i-1], mousePosListY[i-1])
-        ctx.stroke()
-    }
     let tempcanvas = canvas
     ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2-mouseY, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2-mouseY, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2, mouseX, mouseY)
+    ctx.drawImage(tempcanvas, (WIDTH/2)-(mouseX/2), (HEIGHT/2)-(mouseY/2), mouseX, mouseY)
 
     //ctx.fillStyle = "rgb( 255 400 300 / 10%";
     //ctx.fillRect(0, 0, WIDTH, HEIGHT);
