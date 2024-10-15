@@ -11,8 +11,6 @@ let mouseY = HEIGHT/2;
 
 var MouseDownPos = 0;
 
-canvas.requestPointerLock();
-
 function updateMousePosition(event) {
     const rect = canvas.getBoundingClientRect();
     //mouseX = event.clientX - rect.left;
@@ -32,15 +30,18 @@ function updateMousePosition(event) {
 }
 
 function draw() {
-    ctx.filter = "contrast(101%) hue-rotate(5deg) invert(1) saturate(120%)"
+    ctx.filter = "contrast(100%) hue-rotate(1deg) invert(1) saturate(110%)"
     let tempcanvas = canvas
+    //ctx.drawImage(tempcanvas, 10, 10, WIDTH-20, HEIGHT-20)
     ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2-mouseY, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2-mouseY, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2, mouseX, mouseY)
     ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2, mouseX, mouseY)
     ctx.drawImage(tempcanvas, (WIDTH/2)-(mouseX/2), (HEIGHT/2)-(mouseY/2), mouseX, mouseY)
+    ctx.filter = "saturate(110%) hue-rotate(10deg) brightness(99%)"
+    ctx.drawImage(tempcanvas, 0, 0, WIDTH, HEIGHT)
 
-    //ctx.fillStyle = "rgb( 255 400 300 / 10%";
+    //ctx.fillStyle = "rgb( 255 400 300 / 1%";
     //ctx.fillRect(0, 0, WIDTH, HEIGHT);
     requestAnimationFrame(draw)
 }
@@ -81,5 +82,8 @@ document.addEventListener('touchstart', (event) => {
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
 }, { passive: false });
 
+canvas.addEventListener('click', function() {
+    canvas.requestPointerLock();
+});
 
 requestAnimationFrame(draw)

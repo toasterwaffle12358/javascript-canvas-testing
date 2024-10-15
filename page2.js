@@ -10,8 +10,12 @@ let mouseX = 0;
 let mouseY = 0;
 let mousePosListX = []
 let mousePosListY = []
-let pastPosListsX = [[0]]
-let pastPosListsY = [[0]]
+//let pastPosListsX = [[0]]
+//let pastPosListsY = [[0]]
+
+let pastPosListsX = startingPastPosListX
+let pastPosListsY = startingPastPosListY
+
 
 var MouseDownPos = 0;
 
@@ -54,6 +58,7 @@ function draw() {
     ctx.fillStyle = "rgb(255 255 255)"
     ctx.fillRect(0, 0, WIDTH, HEIGHT)
 
+    /*
     if (userIsMobile == false && hasCleared == false) {
         const img = new Image();
         img.src = "resources/page2_instructions.png";
@@ -67,6 +72,7 @@ function draw() {
 
         ctx.drawImage(img, ((WIDTH - drawWidth)/2), ((HEIGHT - drawHeight)/2), drawWidth, drawHeight);
     };
+    */
 
     for (strokeX in pastPosListsX) {
         for (point in pastPosListsX[strokeX]) {
