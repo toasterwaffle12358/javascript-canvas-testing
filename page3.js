@@ -33,10 +33,11 @@ function draw() {
     ctx.filter = "contrast(100%) hue-rotate(1deg) invert(1) saturate(110%)"
     let tempcanvas = canvas
     //ctx.drawImage(tempcanvas, 10, 10, WIDTH-20, HEIGHT-20)
-    ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2-mouseY, mouseX, mouseY)
-    ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2-mouseY, mouseX, mouseY)
-    ctx.drawImage(tempcanvas, WIDTH/2-mouseX, HEIGHT/2, mouseX, mouseY)
-    ctx.drawImage(tempcanvas, WIDTH/2, HEIGHT/2, mouseX, mouseY)
+    ctx.drawImage(tempcanvas, (WIDTH/2)-(mouseX*1.5), (HEIGHT/2)-(mouseY*1.5), mouseX*3, mouseY*3)
+    ctx.drawImage(tempcanvas, WIDTH/2-(mouseX*1.5), HEIGHT/2-(mouseY*1.5), mouseX, mouseY)
+    ctx.drawImage(tempcanvas, WIDTH/2+(mouseX/2), HEIGHT/2-(mouseY*1.5), mouseX, mouseY)
+    ctx.drawImage(tempcanvas, WIDTH/2-(mouseX*1.5), HEIGHT/2+(mouseY/2), mouseX, mouseY)
+    ctx.drawImage(tempcanvas, (WIDTH/2)+(mouseX/2), HEIGHT/2+(mouseY/2), mouseX, mouseY)
     ctx.drawImage(tempcanvas, (WIDTH/2)-(mouseX/2), (HEIGHT/2)-(mouseY/2), mouseX, mouseY)
     ctx.filter = "saturate(110%) hue-rotate(10deg) brightness(99%)"
     ctx.drawImage(tempcanvas, 0, 0, WIDTH, HEIGHT)

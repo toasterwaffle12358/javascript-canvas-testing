@@ -52,6 +52,22 @@ function updateMousePosition(event) {
     */
 
 }
+if (WIDTH > HEIGHT) {
+    for (i in pastPosListsX) {
+        for (j in pastPosListsX[i]) {
+            pastPosListsX[i][j] = ((pastPosListsX[i][j]/1920)*WIDTH)
+            pastPosListsY[i][j] = ((pastPosListsY[i][j]/1080)*HEIGHT)
+        }
+    }
+} else {
+    for (i in pastPosListsX) {
+        for (j in pastPosListsX[i]) {
+            pastPosListsX[i][j] = ((pastPosListsX[i][j]/1920)*WIDTH)
+            pastPosListsY[i][j] = ((pastPosListsY[i][j]/1080)*WIDTH)
+        }
+    }
+}
+
 
 
 function draw() {

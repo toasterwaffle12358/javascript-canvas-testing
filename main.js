@@ -18,6 +18,8 @@ let highContrast = false
 
 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
+let color_change_slider = document.getElementById('color_change_slider')
+
 if (/android|iPhone|iPad|iPod|opera mini|IEMobile|WPDesktop/i.test(userAgent)) {
     console.log("user is on mobile")
     document.getElementById("change_mode_button").style.display = "block"
@@ -32,7 +34,6 @@ function updateMousePosition(event) {
 }
 
 function draw() {
-    console.log(WIDTH)
 
     /*
     for (let i = 0; i < 100; i++) {
@@ -58,27 +59,18 @@ function draw() {
     ctx.drawImage(tempcanvas, -WIDTH*0.003, -HEIGHT*0.003, WIDTH*1.006, HEIGHT*1.006)
     ctx.filter = "none"
 
-    console.log("function ran")
     ctx.fillStyle = "rgb( 0 0 0 / 1%";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-    console.log("drawn")
     requestAnimationFrame(draw)
 
 }
 
 canvas.addEventListener('mousemove', (event) => {
     updateMousePosition(event);
-    hue = hue +5
+    hue = hue + color_change_slider.value/1
     hue = hue%360
-
-    /*
-    ctx.fillStyle = "rgb( 0 0 0 / 2%";
-    ctx.fillRect(0, 0, WIDTH, HEIGHT);
-    ctx.drawImage(canvas, -WIDTH*0.003, -HEIGHT*0.003, WIDTH*1.006, HEIGHT*1.006)
-    draw();
-    console.log("drawn")
-    */
+    console.log(color_change_slider.value)
 });
 
 //setInterval(draw, 10);
