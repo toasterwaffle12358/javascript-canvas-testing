@@ -3256,3 +3256,11 @@ let startingPastPosListY = [
       605
     ]
 ]
+
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
+    
+const WIDTH = window.innerWidth
+const HEIGHT = window.innerHeight
+ctx.canvas.width = WIDTH
+ctx.canvas.height = HEIGHT

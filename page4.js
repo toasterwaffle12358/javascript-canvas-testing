@@ -12,7 +12,8 @@ let ballX = WIDTH/2
 let ballY = HEIGHT/2
 let pastBallX = WIDTH/2
 let pastBallY = HEIGHT/2
-let gravity = 0
+let accelerationY = 1
+let accelerationX = 0
 
 let mouseX = 0
 let mouseY = 0 
@@ -26,8 +27,8 @@ function updateMousePosition(event) {
     const rect = canvas.getBoundingClientRect();
     mouseX = event.movementX
     mouseY = event.movementY
-    velocityX += mouseX*100000
-    velocityY += mouseY*100000
+    //velocityX = mouseX
+    //velocityY = mouseY
 }
 
 
@@ -43,7 +44,8 @@ function draw() {
     pastBallX = ballX
     pastBallY = ballY
     
-    velocityY += gravity
+    velocityY += accelerationY
+    velocityX += accelerationX
     velocityX = velocityX*0.999
     velocityY = velocityY*0.999
     ballX += velocityX
@@ -96,8 +98,28 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
-    if (isMouseCaptured && event.key === 'Escape') {
-        document.exitPointerLock(); // Exit pointer lock
+    switch (event.key) {
+        case 'Escape' :
+            if (isMouseCaptured) {
+                document.exitPointerLock(); // Exit pointer lock
+            }
+            break
+        case 'ArrowDown' :
+            accelerationY = 1
+            accelerationX = 0
+            break
+        case 'ArrowUp' :
+            accelerationY = -1
+            accelerationX = 0 
+            break
+        case 'ArrowLeft' :
+            accelerationY = 0
+            accelerationX = -1 
+            break
+        case 'ArrowRight' :
+            accelerationY = 0
+            accelerationX = 1
+            break
     }
 });
 
