@@ -31,9 +31,9 @@ function getDistances() {
 
 
 function draw() {
-    ctx.fillStyle = "rgb( 255 255 255)";
-    ctx.fillRect(0, 0, WIDTH, HEIGHT);
     ctx.fillStyle = "rgb( 0 0 0)";
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    ctx.fillStyle = "rgb( 200 200 200)";
     getDistances()
     requestAnimationFrame(draw)
 }
