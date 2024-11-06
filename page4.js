@@ -105,20 +105,20 @@ document.addEventListener('keydown', (event) => {
             }
             break
         case 'ArrowDown' :
-            accelerationY = 1
+            accelerationY = 0.5
             accelerationX = 0
             break
         case 'ArrowUp' :
-            accelerationY = -1
+            accelerationY = -0.5
             accelerationX = 0 
             break
         case 'ArrowLeft' :
             accelerationY = 0
-            accelerationX = -1 
+            accelerationX = -0.5 
             break
         case 'ArrowRight' :
             accelerationY = 0
-            accelerationX = 1
+            accelerationX = 0.5
             break
     }
 });
