@@ -3,6 +3,7 @@ ctx.fillStyle = "rgb( 0 0 0)";
 
 
 let playerPosition = [6,5]
+
 let pointPosList = [[0,0,1],
 [0,0.2,0],[0,0.4,0],[0,0.6,0],[0,0.8,0],[0,1,0],[0,1.2,0],[0,1.4,0],[0,1.6,0],[0,1.8,0],
 [0,2,1],[2,2,1],[2,0,1],[1.8,0,0],[1.6,0,0],[1.4,0,0],[1.2,0,0],[1,0,0],[0.8,0,0],[0.6,0,0],[0.4,0,0],[0.2,0,0],[0,0,0],
@@ -21,17 +22,21 @@ let pastDistance = 0
 let pastScreenXPos = 0
 let mouseX = 0
 
+let lineAlphaSlider = document.getElementById('alpha_slider')
+let lineAlpha = lineAlphaSlider.value
+console.log(lineAlpha)
+
 function updateMousePosition(event) {
     mouseX += event.movementX
-    playerViewAngle = (mouseX/100)%(360)
+    playerViewAngle = (mouseX/50)%(360)
     playerViewAngleRads = (playerViewAngle/360)*2*Math.PI
-    console.log("player view angle:")
-    console.log(playerViewAngle)
+    //console.log("player view angle:")
+    //console.log(playerViewAngle)
 }
 
 
 function connectSides(screenXPos, pastScreenXPos, distance, pastDistance) {
-    ctx.strokeStyle = "rgb( 50 100 200)"
+    ctx.strokeStyle = `rgb( 50 100 200 /${lineAlphaSlider.value}%)`
     ctx.beginPath()
     ctx.moveTo(pastScreenXPos, (HEIGHT/2)+((HEIGHT/pastDistance)/2));
     ctx.lineTo(screenXPos, (HEIGHT/2)+((HEIGHT/distance)/2))
@@ -49,25 +54,20 @@ function drawSides() {
         distance = Math.sqrt(Math.pow(playerPosition[0] - pointPosList[i][0], 2)+Math.pow(playerPosition[1] - pointPosList[i][1], 2))
         //angle = Math.atan((playerPosition[1]- pointPosList[i][1])/(playerPosition[0]-pointPosList[i][0]))
         angle = (Math.atan2((playerPosition[1]- pointPosList[i][1]),(playerPosition[0]-pointPosList[i][0]))* 180) / Math.PI
-        
         angle = angle + playerViewAngle
-        console.log("angle:")
-        console.log(angle)
+        if (angle <= -90) {
+            angle += 360
+        }
+        if (angle >= 270) {
+            angle += -360
+        }
+        //console.log("angle:")
+        //console.log(angle)
         
 
+        screenXPos = ((180-angle)/(180))*WIDTH
 
-        if (angle >= 0 && angle <= 180) {
-            screenXPos = ((180-angle)/(180))*WIDTH
-            //screenXPos = ((Math.cos(angle)*(WIDTH/2))+(WIDTH/2))
-        } else {
-            if (angle >= -Math.PI) {
-
-            }
-            //screenXPos = ((-angle)/(180))*WIDTH
-            //screenXPos = ((WIDTH/2)-(Math.cos(angle)*(WIDTH/2)))
-        }
-
-        if (screenXPos > 0 && screenXPos < WIDTH && pointPosList[i][2] == 1) {
+        if (screenXPos > 0 && screenXPos < WIDTH ) {
             ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), 2, HEIGHT/distance);
         }
         connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
@@ -77,26 +77,27 @@ function drawSides() {
 }
 //getDistances()
 function drawMap() {
-    ctx.fillStyle = "rgb( 50 50 50)"
+    ctx.fillStyle = "rgb( 30 30 30)"
     ctx.fillRect(0, HEIGHT-200, 200, 200);
     ctx.fillStyle = "rgb( 255 255 255)"
-    ctx.fillRect(100-playerPosition[0]*10, (HEIGHT-200)+(playerPosition[1]*10), 5, 5);
+    ctx.fillRect(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10), 3, 3);
+    ctx.fillStyle = "rgb( 255 0 255)"
     for (i in pointPosList) {
-        ctx.fillRect(100-pointPosList[i][0]*10, (HEIGHT-200)+(pointPosList[i][1]*10), 2, 2);
+        ctx.fillRect(100-pointPosList[i][0]*10, (HEIGHT-110)+(pointPosList[i][1]*10), 2, 2);
     }
     ctx.strokeStyle = "rgb( 0 255 0)"
     ctx.beginPath()
-    ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-200)+(playerPosition[1]*10));
-    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads)*100), (HEIGHT-200)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads)*100))
+    ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
+    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads)*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads)*100))
     ctx.stroke()
     ctx.strokeStyle = "rgb( 255 0 0)"
     ctx.beginPath()
-    ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-200)+(playerPosition[1]*10));
-    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads+Math.PI/2)*100), (HEIGHT-200)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads+Math.PI/2)*100))
+    ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
+    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads+Math.PI/2)*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads+Math.PI/2)*100))
     ctx.stroke()
     ctx.beginPath()
-    ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-200)+(playerPosition[1]*10));
-    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads-Math.PI/2)*100), (HEIGHT-200)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads-Math.PI/2)*100))
+    ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
+    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads-Math.PI/2)*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads-Math.PI/2)*100))
     ctx.stroke()
 }
 
@@ -163,6 +164,7 @@ document.addEventListener('keydown', (event) => {
             break
     }
 });
+
 
 canvas.addEventListener('mousemove', (event) => {
     updateMousePosition(event);

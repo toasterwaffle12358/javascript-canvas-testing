@@ -35,7 +35,7 @@ function updateMousePosition(event) {
 
 function draw() {
 
-    /*
+    /*=
     for (let i = 0; i < 100; i++) {
         ctx.fillStyle = `hsl(${i*10} 50% ${i}%)`;
         ctx.fillRect(i*((mouseX-(WIDTH/2))/50)+(WIDTH/2)-(i/2), i*((mouseY-(HEIGHT/2))/50)+(HEIGHT/2)-(i/2), i, i);

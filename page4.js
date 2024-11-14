@@ -18,6 +18,7 @@ let accelerationX = 0
 let mouseX = 0
 let mouseY = 0 
 
+
 hue = 1
 
 ctx.fillStyle = "rgb(0 0 0%)"

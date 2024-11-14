@@ -121,7 +121,12 @@ a {
 }
 .slider_container {
     width: 0px;
+    color: white;
+    width: 400px;
 }
 .nocursor {
     cursor: none;
+}
+.slider_text {
+    padding-left: 10px;
 }
