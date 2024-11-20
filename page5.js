@@ -25,6 +25,7 @@ let mouseX = 0
 let lineAlphaSlider = document.getElementById('alpha_slider')
 let lineAlpha = lineAlphaSlider.value
 console.log(lineAlpha)
+createMesh()
 
 function updateMousePosition(event) {
     mouseX += event.movementX
@@ -36,15 +37,23 @@ function updateMousePosition(event) {
 
 
 function connectSides(screenXPos, pastScreenXPos, distance, pastDistance) {
-    ctx.strokeStyle = `rgb( 50 100 200 /${lineAlphaSlider.value}%)`
-    ctx.beginPath()
-    ctx.moveTo(pastScreenXPos, (HEIGHT/2)+((HEIGHT/pastDistance)/2));
-    ctx.lineTo(screenXPos, (HEIGHT/2)+((HEIGHT/distance)/2))
-    ctx.stroke()
-    ctx.beginPath()
-    ctx.moveTo(pastScreenXPos, (HEIGHT/2)-((HEIGHT/pastDistance)/2));
-    ctx.lineTo(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2))
-    ctx.stroke()
+    if (( screenXPos >= 0 && screenXPos <= WIDTH) || (pastScreenXPos >=0 && pastScreenXPos <= WIDTH)) {
+        ctx.strokeStyle = `rgb( 50 100 200 /${lineAlphaSlider.value}%)`
+        ctx.beginPath()
+        ctx.moveTo(pastScreenXPos, (HEIGHT/2)+((HEIGHT/pastDistance)/2));
+        ctx.lineTo(screenXPos, (HEIGHT/2)+((HEIGHT/distance)/2))
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.moveTo(pastScreenXPos, (HEIGHT/2)-((HEIGHT/pastDistance)/2));
+        ctx.lineTo(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2))
+        ctx.stroke()
+    }
+}
+
+function createMesh() {
+    for (let i = 0; i < 1000; i++) {
+        pointPosList.push([-2+i/50, 5, 1])
+    }
 }
 
 function drawSides() {
@@ -68,6 +77,7 @@ function drawSides() {
         screenXPos = ((180-angle)/(180))*WIDTH
 
         if (screenXPos > 0 && screenXPos < WIDTH ) {
+            ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} )`;
             ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), 2, HEIGHT/distance);
         }
         connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
@@ -75,7 +85,6 @@ function drawSides() {
         
     }
 }
-//getDistances()
 function drawMap() {
     ctx.fillStyle = "rgb( 30 30 30)"
     ctx.fillRect(0, HEIGHT-200, 200, 200);
@@ -105,7 +114,7 @@ function drawMap() {
 function draw() {
     ctx.fillStyle = "rgb( 0 0 0)";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
-    ctx.fillStyle = "rgb( 200 0 200)";
+    ctx.fillStyle = `rgb( ${distance*100} 0 200 )`;
     drawSides()
     requestAnimationFrame(draw)
     drawMap()
