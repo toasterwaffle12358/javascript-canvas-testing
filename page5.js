@@ -2,13 +2,16 @@ ctx.fillStyle = "rgb( 0 0 0)";
 //ctx.fillRect(WIDTH/2, HEIGHT/2, 100, 100);
 
 
-let playerPosition = [6,5]
+let playerPosition = [6,4]
 
-let pointPosList = [[0,0,1],
+let pointPosList = []
+/*
+pointPosList = [[0,0,1],
 [0,0.2,0],[0,0.4,0],[0,0.6,0],[0,0.8,0],[0,1,0],[0,1.2,0],[0,1.4,0],[0,1.6,0],[0,1.8,0],
 [0,2,1],[2,2,1],[2,0,1],[1.8,0,0],[1.6,0,0],[1.4,0,0],[1.2,0,0],[1,0,0],[0.8,0,0],[0.6,0,0],[0.4,0,0],[0.2,0,0],[0,0,0],
 [0,-2],[2,-2],[2,0],[4,0],[4,2],[2,2],[2,4],[0,4],[0,2],[-2,2],[-2,0],[0,0]
 ]
+*/
 
 //pointPosList = [[1,1,1]]
 
@@ -23,6 +26,7 @@ let pastScreenXPos = 0
 let mouseX = 0
 
 let lineAlphaSlider = document.getElementById('alpha_slider')
+let fovSlider = document.getElementById('fov_slider')
 let lineAlpha = lineAlphaSlider.value
 console.log(lineAlpha)
 createMesh()
@@ -51,9 +55,70 @@ function connectSides(screenXPos, pastScreenXPos, distance, pastDistance) {
 }
 
 function createMesh() {
-    for (let i = 0; i < 1000; i++) {
+    //bottom interior
+    for (let i = 0; i < 100; i++) {
         pointPosList.push([-2+i/50, 5, 1])
     }
+    //top
+    for (let i = 0; i < 200; i++) {
+        pointPosList.push([-3+i/50, 2, 1])
+    }
+    //top of bottom
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([-2+i/50, 6, 1])
+    }
+    //top interior
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([-2+i/50, 3, 1])
+    }
+    //left leg interior
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([0, 6+i/50, 1])
+    }
+    //left interior
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([0, 3+i/50, 1])
+    }
+    //left side
+    for (let i = 0; i < 300; i++) {
+        pointPosList.push([1, 2+i/50, 1])
+    }
+    //right side
+    for (let i = 0; i < 300; i++) {
+        pointPosList.push([-3, 2+i/50, 1])
+    }
+    //right interior
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([-2, 3+i/50, 1])
+    }
+    //right leg interior
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([-2, 6+i/50, 1])
+    }
+
+    //left exterior
+    for (let i = 0; i < 300; i++) {
+        pointPosList.push([-5-(i/250), 2+i/50, 1])
+    }
+    //left interior
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([-6-(i/250), 2+i/50, 1])
+    }
+    //right exterior
+    for (let i = 0; i < 300; i++) {
+        pointPosList.push([-7.5+(i/250), 2+i/50, 1])
+    }
+    for (let i = 0; i < 100; i++) {
+        pointPosList.push([-7+(i/250), 2+i/50, 1])
+    }
+
+    for (let i = 0; i < 300; i++) {
+        pointPosList.push([-9, 2+i/50, 1])
+    }
+    for (let i = 0; i < 300; i++) {
+        pointPosList.push([-10, 2+i/50, 1])
+    }
+
 }
 
 function drawSides() {
@@ -74,7 +139,7 @@ function drawSides() {
         //console.log(angle)
         
 
-        screenXPos = ((180-angle)/(180))*WIDTH
+        screenXPos = ((((fovSlider.value)/2)-angle)/(fovSlider.value/1))*(WIDTH)
 
         if (screenXPos > 0 && screenXPos < WIDTH ) {
             ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} )`;
