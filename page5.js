@@ -139,7 +139,7 @@ function drawSides() {
         //console.log(angle)
         
 
-        screenXPos = ((((fovSlider.value)/2)-angle)/(fovSlider.value/1))*(WIDTH)
+        screenXPos = (((((fovSlider.value/2)+90)-angle))/(fovSlider.value/1))*(WIDTH)
 
         if (screenXPos > 0 && screenXPos < WIDTH ) {
             ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} )`;

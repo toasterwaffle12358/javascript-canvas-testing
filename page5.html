@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="navbaritem">
-                page 2
+                <a href="page2.html"> page 2</a>
             </div>
             <div class="navbaritem">
                 <a href="page3.html"> page 3</a>
@@ -37,7 +37,8 @@
             </p>
         </div>
         <div class="slider_container">
-            <input type="range" min="90" max="360" value="360" class="slider" id="fov_slider">
+            <input type="range" min="90" max="360" value="180" class="slider" id="fov_slider" oninput="this.nextElementSibling.value = this.value">
+            <output>180</output>
             <p class="slider_text">
                 FOV
             </p>
