@@ -27,8 +27,8 @@ let mouseX = 0
 
 let lineAlphaSlider = document.getElementById('alpha_slider')
 let fovSlider = document.getElementById('fov_slider')
-let lineAlpha = lineAlphaSlider.value
-console.log(lineAlpha)
+let minimapAlphaSlider = document.getElementById('minimap_alpha_slider')
+let settingsButton = document.getElementById('settings_button')
 createMesh()
 
 function updateMousePosition(event) {
@@ -151,27 +151,27 @@ function drawSides() {
     }
 }
 function drawMap() {
-    ctx.fillStyle = "rgb( 30 30 30)"
+    ctx.fillStyle = `rgb( 30 30 30/ ${minimapAlphaSlider.value}%)`
     ctx.fillRect(0, HEIGHT-200, 200, 200);
-    ctx.fillStyle = "rgb( 255 255 255)"
+    ctx.fillStyle = `rgb( 255 255 255/ ${minimapAlphaSlider.value}%)`
     ctx.fillRect(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10), 3, 3);
-    ctx.fillStyle = "rgb( 255 0 255)"
+    ctx.fillStyle = `rgb( 255 0 255/ ${minimapAlphaSlider.value}%)`
     for (i in pointPosList) {
         ctx.fillRect(100-pointPosList[i][0]*10, (HEIGHT-110)+(pointPosList[i][1]*10), 2, 2);
     }
-    ctx.strokeStyle = "rgb( 0 255 0)"
+    ctx.strokeStyle = `rgb( 0 255 0/ ${minimapAlphaSlider.value}%)`
     ctx.beginPath()
     ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
     ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads)*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads)*100))
     ctx.stroke()
-    ctx.strokeStyle = "rgb( 255 0 0)"
+    ctx.strokeStyle = `rgb( 255 0 0/ ${minimapAlphaSlider.value}%)`
     ctx.beginPath()
     ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
-    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads+Math.PI/2)*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads+Math.PI/2)*100))
+    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads+((fovSlider.value*Math.PI/180)/2))*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads+((fovSlider.value*Math.PI/180)/2))*100))
     ctx.stroke()
     ctx.beginPath()
     ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
-    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads-Math.PI/2)*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads-Math.PI/2)*100))
+    ctx.lineTo((100-playerPosition[0]*10)+(Math.sin(playerViewAngleRads-((fovSlider.value*Math.PI/180)/2))*100), (HEIGHT-110)+(playerPosition[1]*10)-(Math.cos(playerViewAngleRads-((fovSlider.value*Math.PI/180)/2))*100))
     ctx.stroke()
 }
 
@@ -247,5 +247,29 @@ canvas.addEventListener('mousemove', (event) => {
 canvas.addEventListener('click', function() {
     canvas.requestPointerLock();
 });
+settingsButton.addEventListener("click", function() {
+    var content = this.nextElementSibling;
+    if (content.style.display === "contents") {
+        content.style.display = "none";
+        console.log("hiding")
+      } else {
+        content.style.display = "contents";
+        console.log("showing")
+    }
+})
+document.getElementById('save_canvas').addEventListener('click', function(e) {
+    let canvasUrl = canvas.toDataURL
+    var createEl = document.createElement('a');
+    createEl.href = canvasUrl;
+
+    // This is the name of our downloaded file
+    createEl.download = "downloaded-canvas";
+
+    // Click the download button, causing a download, and then remove it
+    createEl.click();
+    createEl.remove();
+
+
+})
 
 requestAnimationFrame(draw)

@@ -30,18 +30,30 @@
                 hello
             </div>
         </div>
-        <div class="slider_container">
-            <input type="range" min="1" max="100" value="5" class="slider" id="alpha_slider">
-            <p class="slider_text">
-                horizontal edge opacity
-            </p>
-        </div>
-        <div class="slider_container">
-            <input type="range" min="90" max="360" value="180" class="slider" id="fov_slider" oninput="this.nextElementSibling.value = this.value">
-            <output>180</output>
-            <p class="slider_text">
-                FOV
-            </p>
+        <button type="button" id="settings_button">Toggle Settings</button>
+        <div class="content" >
+            <div class="slider_container">
+                <input type="range" min="1" max="100" value="5" class="slider" id="alpha_slider">
+                <p class="slider_text">
+                    horizontal edge opacity
+                </p>
+            </div>
+            <div class="slider_container">
+                <input type="range" min="45" max="360" value="100" class="slider" step="5" id="fov_slider" oninput="this.nextElementSibling.value = this.value">
+                <output>100</output>
+                <p class="slider_text">
+                    FOV
+                </p>
+            </div>
+            <div class="slider_container">
+                <input type="range" min="0" max="100" value="80" class="slider" id="minimap_alpha_slider">
+                <p class="slider_text">
+                    Mini-Map Opacity
+                </p>
+            </div>
+            <div class="slider_container">
+                <button type="button" id="save_canvas" class="menu_button">Save canvas as image (not currently working)</button>
+            </div>
         </div>
     </div>
     <body>

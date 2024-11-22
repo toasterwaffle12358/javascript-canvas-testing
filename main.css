@@ -111,7 +111,7 @@ a {
 }
 .slider {
     height: 10px;
-    width: 400px;
+    width: 350px;
     margin: 10px;
     align-self: center;
     background-color: aqua;
@@ -120,13 +120,57 @@ a {
     width: 64px;
 }
 .slider_container {
-    width: 0px;
     color: white;
     width: 400px;
+    background-color: rgba(184, 184, 184, 0.2);
+    margin: 10px;
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    margin-bottom: 0px;
+    padding-top: 10px;
 }
 .nocursor {
     cursor: none;
 }
 .slider_text {
     padding-left: 10px;
+}
+.content {
+    overflow: hidden;
+    display:none;
+    background-color: blueviolet;
+}
+#settings_button {
+    max-width: 300px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: rgba(184, 184, 184, 0.473);
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    color: white;
+    padding: 5px;
+}
+#settings_button:hover {
+    background-color: rgba(184, 184, 184, 0.3);
+}
+output {
+    margin-left: 10px;
+}
+.menu_button {
+    max-width: 300px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: rgba(184, 184, 184, 0.473);
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    color: white;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.menu_button:hover {
+    background-color: rgba(184, 184, 184, 0.2);
 }
