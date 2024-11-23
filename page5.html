@@ -39,7 +39,8 @@
                 </p>
             </div>
             <div class="slider_container">
-                <input type="range" min="45" max="360" value="100" class="slider" step="5" id="fov_slider" oninput="this.nextElementSibling.value = this.value">
+                <input type="range" min="45" max="360" value="100" class="slider" step="5" id="fov_slider" oninput="this.nextElementSibling.nextElementSibling.value = this.value">
+                <br>
                 <output>100</output>
                 <p class="slider_text">
                     FOV
@@ -48,11 +49,27 @@
             <div class="slider_container">
                 <input type="range" min="0" max="100" value="80" class="slider" id="minimap_alpha_slider">
                 <p class="slider_text">
-                    Mini-Map Opacity
+                    Mini-Map opacity
                 </p>
             </div>
             <div class="slider_container">
-                <button type="button" id="save_canvas" class="menu_button">Save canvas as image (not currently working)</button>
+                <input type="range" min="1" max="100" value="50" class="slider" id="sensitivity_slider" oninput="this.nextElementSibling.nextElementSibling.value = this.value">
+                <br>
+                <output>50</output>
+                <p class="slider_text">
+                    Mouse sensitivity
+                </p>
+            </div>
+            <div class="slider_container">
+                <input type="range" min="0" max="360" value="90" class="slider" id="view_angle_override_slider" oninput="this.nextElementSibling.nextElementSibling.value = this.value">
+                <br>
+                <output>90</output>
+                <p class="slider_text">
+                    Manual view angle override (not working)
+                </p>
+            </div>
+            <div class="slider_container">
+                <button type="button" id="save_canvas" class="menu_button">Save canvas as image</button>
             </div>
         </div>
     </div>

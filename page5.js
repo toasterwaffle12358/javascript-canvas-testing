@@ -29,11 +29,13 @@ let lineAlphaSlider = document.getElementById('alpha_slider')
 let fovSlider = document.getElementById('fov_slider')
 let minimapAlphaSlider = document.getElementById('minimap_alpha_slider')
 let settingsButton = document.getElementById('settings_button')
+let sensitivitySlider = document.getElementById('sensitivity_slider')
+let viewAngleSlider = document.getElementById('view_angle_override_slider')
 createMesh()
 
 function updateMousePosition(event) {
     mouseX += event.movementX
-    playerViewAngle = (mouseX/50)%(360)
+    playerViewAngle = (mouseX/(101-sensitivitySlider.value))%(360)
     playerViewAngleRads = (playerViewAngle/360)*2*Math.PI
     //console.log("player view angle:")
     //console.log(playerViewAngle)
@@ -258,7 +260,7 @@ settingsButton.addEventListener("click", function() {
     }
 })
 document.getElementById('save_canvas').addEventListener('click', function(e) {
-    let canvasUrl = canvas.toDataURL
+    let canvasUrl = canvas.toDataURL("image/png")
     var createEl = document.createElement('a');
     createEl.href = canvasUrl;
 
@@ -270,6 +272,9 @@ document.getElementById('save_canvas').addEventListener('click', function(e) {
     createEl.remove();
 
 
+})
+viewAngleSlider.addEventListener("mouseup", function() {
+    playerViewAngle = viewAngleSlider.value
 })
 
 requestAnimationFrame(draw)
