@@ -18,6 +18,8 @@ let accelerationX = 0
 let mouseX = 0
 let mouseY = 0 
 
+let ballsList = [[WIDTH/2,HEIGHT/2,10,10]]
+
 
 hue = 1
 
@@ -97,6 +99,9 @@ function draw() {
 canvas.addEventListener('mousemove', (event) => {
     updateMousePosition(event);
 });
+canvas.addEventListener('mousedown', (event) => {
+    ballsList.push([mouseX,mouseY,10,10])
+});
 
 document.addEventListener('keydown', (event) => {
     switch (event.key) {
@@ -124,7 +129,4 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-canvas.addEventListener('click', function() {
-    canvas.requestPointerLock();
-});
 requestAnimationFrame(draw)
