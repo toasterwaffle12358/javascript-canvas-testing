@@ -174,3 +174,17 @@ output {
 .menu_button:hover {
     background-color: rgba(184, 184, 184, 0.2);
 }
+.mapselector {
+    display: inline;
+}
+.map {
+    display:inline;
+    margin-left: 10px;
+    background-color: rgba(184, 184, 184, 0.473);
+    border-radius: 10px;
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    color: white;
+    padding: 5px;
+}

@@ -25,12 +25,19 @@ let pastDistance = 0
 let pastScreenXPos = 0
 let mouseX = 0
 
+let gradient = ctx.createLinearGradient(WIDTH/2, 0, WIDTH/2, HEIGHT);
+gradient.addColorStop(0, "#1c0626");
+gradient.addColorStop(0.5, "black");
+gradient.addColorStop(1, "#1c0626");
+
 let lineAlphaSlider = document.getElementById('alpha_slider')
 let fovSlider = document.getElementById('fov_slider')
 let minimapAlphaSlider = document.getElementById('minimap_alpha_slider')
 let settingsButton = document.getElementById('settings_button')
 let sensitivitySlider = document.getElementById('sensitivity_slider')
 let viewAngleSlider = document.getElementById('view_angle_override_slider')
+let map1Button = document.getElementById('map1')
+let map2Button = document.getElementById('map2')
 createMesh()
 
 function updateMousePosition(event) {
@@ -181,6 +188,8 @@ function drawMap() {
 function draw() {
     ctx.fillStyle = "rgb( 0 0 0)";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
     ctx.fillStyle = `rgb( ${distance*100} 0 200 )`;
     drawSides()
     requestAnimationFrame(draw)
@@ -270,9 +279,18 @@ document.getElementById('save_canvas').addEventListener('click', function(e) {
     // Click the download button, causing a download, and then remove it
     createEl.click();
     createEl.remove();
-
-
 })
+
+map1Button.addEventListener('click', function(e) {
+    pointPosList = []
+    createMesh()
+})
+map2Button.addEventListener('click', function(e) {
+    pointPosList = []
+    map2()
+})
+
+
 viewAngleSlider.addEventListener("mouseup", function() {
     playerViewAngle = viewAngleSlider.value
 })
