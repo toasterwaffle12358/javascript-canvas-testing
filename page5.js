@@ -1,19 +1,8 @@
 ctx.fillStyle = "rgb( 0 0 0)";
-//ctx.fillRect(WIDTH/2, HEIGHT/2, 100, 100);
-
 
 let playerPosition = [6,4]
 
 let pointPosList = []
-/*
-pointPosList = [[0,0,1],
-[0,0.2,0],[0,0.4,0],[0,0.6,0],[0,0.8,0],[0,1,0],[0,1.2,0],[0,1.4,0],[0,1.6,0],[0,1.8,0],
-[0,2,1],[2,2,1],[2,0,1],[1.8,0,0],[1.6,0,0],[1.4,0,0],[1.2,0,0],[1,0,0],[0.8,0,0],[0.6,0,0],[0.4,0,0],[0.2,0,0],[0,0,0],
-[0,-2],[2,-2],[2,0],[4,0],[4,2],[2,2],[2,4],[0,4],[0,2],[-2,2],[-2,0],[0,0]
-]
-*/
-
-//pointPosList = [[1,1,1]]
 
 
 let distance = 0
@@ -24,6 +13,12 @@ let playerViewAngleRads = 0
 let pastDistance = 0
 let pastScreenXPos = 0
 let mouseX = 0
+
+const currentUrl = new URL(window.location.href);
+//currentUrl.searchParams.set('map', 1);
+history.replaceState(null, '', currentUrl.toString());
+
+let map = currentUrl.searchParams.get('map')
 
 let gradient = ctx.createLinearGradient(WIDTH/2, 0, WIDTH/2, HEIGHT);
 gradient.addColorStop(0, "#1c0626");
@@ -38,6 +33,7 @@ let sensitivitySlider = document.getElementById('sensitivity_slider')
 let viewAngleSlider = document.getElementById('view_angle_override_slider')
 let map1Button = document.getElementById('map1')
 let map2Button = document.getElementById('map2')
+let map3Button = document.getElementById('map3')
 createMesh()
 
 function updateMousePosition(event) {
@@ -284,11 +280,36 @@ document.getElementById('save_canvas').addEventListener('click', function(e) {
 map1Button.addEventListener('click', function(e) {
     pointPosList = []
     createMesh()
+    currentUrl.searchParams.set('map', 1);
+    history.replaceState(null, '', currentUrl.toString())
 })
 map2Button.addEventListener('click', function(e) {
     pointPosList = []
     map2()
+    currentUrl.searchParams.set('map', 2);
+    history.replaceState(null, '', currentUrl.toString())
 })
+map3Button.addEventListener('click', function(e) {
+    pointPosList = []
+    map3()
+    currentUrl.searchParams.set('map', 3);
+    history.replaceState(null, '', currentUrl.toString())
+})
+
+switch (map) {
+    case "1":
+        pointPosList = []
+        createMesh()
+        break
+    case "2":
+        pointPosList = []
+        map2()
+        break
+    case "3":
+        pointPosList = []
+        map3()
+        break
+}
 
 
 viewAngleSlider.addEventListener("mouseup", function() {
