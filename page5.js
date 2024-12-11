@@ -3,6 +3,7 @@ ctx.fillStyle = "rgb( 0 0 0)";
 let playerPosition = [6,4]
 
 let pointPosList = []
+let spritesPosList = []
 
 
 let distance = 0
@@ -24,6 +25,12 @@ let gradient = ctx.createLinearGradient(WIDTH/2, 0, WIDTH/2, HEIGHT);
 gradient.addColorStop(0, "#1c0626");
 gradient.addColorStop(0.5, "black");
 gradient.addColorStop(1, "#1c0626");
+
+var milly_img = new Image();
+milly_img.src = "./resources/millycat.jpg"; 
+var jinx_img = new Image();
+jinx_img.src = "./resources/jinx.png"; 
+var spritesList = [milly_img, jinx_img]
 
 let lineAlphaSlider = document.getElementById('alpha_slider')
 let fovSlider = document.getElementById('fov_slider')
@@ -164,6 +171,10 @@ function drawMap() {
     for (i in pointPosList) {
         ctx.fillRect(100-pointPosList[i][0]*10, (HEIGHT-110)+(pointPosList[i][1]*10), 2, 2);
     }
+    ctx.fillStyle = `rgb( 100 100 255/ ${minimapAlphaSlider.value}%)`
+    for (i in spritesPosList) {
+        ctx.fillRect(100-spritesPosList[i][0]*10, (HEIGHT-110)+(spritesPosList[i][1]*10), 4, 4);
+    }
     ctx.strokeStyle = `rgb( 0 255 0/ ${minimapAlphaSlider.value}%)`
     ctx.beginPath()
     ctx.moveTo(100-playerPosition[0]*10, (HEIGHT-110)+(playerPosition[1]*10));
@@ -180,6 +191,37 @@ function drawMap() {
     ctx.stroke()
 }
 
+function drawSprites() {
+    
+    for (i in spritesPosList) {
+        pastDistance = distance
+        pastScreenXPos = screenXPos
+        distance = Math.sqrt(Math.pow(playerPosition[0] - spritesPosList[i][0], 2)+Math.pow(playerPosition[1] - spritesPosList[i][1], 2))
+        //angle = Math.atan((playerPosition[1]- pointPosList[i][1])/(playerPosition[0]-pointPosList[i][0]))
+        angle = (Math.atan2((playerPosition[1]- spritesPosList[i][1]),(playerPosition[0]-spritesPosList[i][0]))* 180) / Math.PI
+        angle = angle + playerViewAngle
+        if (angle <= -90) {
+            angle += 360
+        }
+        if (angle >= 270) {
+            angle += -360
+        }
+        //console.log("angle:")
+        //console.log(angle)
+        
+
+        screenXPos = (((((fovSlider.value/2)+90)-angle))/(fovSlider.value/1))*(WIDTH)
+
+        if (true) {
+            ctx.drawImage(spritesList[spritesPosList[i][2]],screenXPos-((HEIGHT*0.75/distance)/2), (HEIGHT/2)-((HEIGHT*0.75/distance)/2), HEIGHT*0.75/distance, HEIGHT*0.75/distance); 
+            //ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), 2, HEIGHT/distance);
+        }
+        connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
+
+        
+    }
+    
+}
 
 function draw() {
     ctx.fillStyle = "rgb( 0 0 0)";
@@ -188,8 +230,10 @@ function draw() {
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
     ctx.fillStyle = `rgb( ${distance*100} 0 200 )`;
     drawSides()
+    drawSprites()
+    drawMap() 
+
     requestAnimationFrame(draw)
-    drawMap()
 }
 
 
@@ -279,18 +323,21 @@ document.getElementById('save_canvas').addEventListener('click', function(e) {
 
 map1Button.addEventListener('click', function(e) {
     pointPosList = []
+    spritesPosList = []
     createMesh()
     currentUrl.searchParams.set('map', 1);
     history.replaceState(null, '', currentUrl.toString())
 })
 map2Button.addEventListener('click', function(e) {
     pointPosList = []
+    spritesPosList = []
     map2()
     currentUrl.searchParams.set('map', 2);
     history.replaceState(null, '', currentUrl.toString())
 })
 map3Button.addEventListener('click', function(e) {
     pointPosList = []
+    spritesPosList = []
     map3()
     currentUrl.searchParams.set('map', 3);
     history.replaceState(null, '', currentUrl.toString())
@@ -299,14 +346,17 @@ map3Button.addEventListener('click', function(e) {
 switch (map) {
     case "1":
         pointPosList = []
+        spritesPosList = []
         createMesh()
         break
     case "2":
         pointPosList = []
+        spritesPosList = []
         map2()
         break
     case "3":
         pointPosList = []
+        spritesPosList = []
         map3()
         break
 }

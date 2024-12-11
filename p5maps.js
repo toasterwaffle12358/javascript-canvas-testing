@@ -112,6 +112,8 @@ function map2() {
         pointPosList.push([-7, -6+i/50, 1])
     }
     
+    spritesPosList.push([8, 9, 0])
+    spritesPosList.push([7, 2, 1])
 
 
 
@@ -137,4 +139,5 @@ function map3() {
         pointPosList.push([i*3/200, -y, 1])
         console.log(i*3/200, y)
     }
+
 }
