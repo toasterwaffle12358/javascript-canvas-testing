@@ -30,7 +30,9 @@ var milly_img = new Image();
 milly_img.src = "./resources/millycat.jpg"; 
 var jinx_img = new Image();
 jinx_img.src = "./resources/jinx.png"; 
-var spritesList = [milly_img, jinx_img]
+var i_know_img = new Image();
+i_know_img.src = "./resources/i-know-what-you-are.gif"; 
+var spritesList = [milly_img, jinx_img, i_know_img]
 
 let lineAlphaSlider = document.getElementById('alpha_slider')
 let fovSlider = document.getElementById('fov_slider')
@@ -38,6 +40,7 @@ let minimapAlphaSlider = document.getElementById('minimap_alpha_slider')
 let settingsButton = document.getElementById('settings_button')
 let sensitivitySlider = document.getElementById('sensitivity_slider')
 let viewAngleSlider = document.getElementById('view_angle_override_slider')
+let lineWidthSlider = document.getElementById('line_width_slider')
 let map1Button = document.getElementById('map1')
 let map2Button = document.getElementById('map2')
 let map3Button = document.getElementById('map3')
@@ -155,7 +158,7 @@ function drawSides() {
 
         if (screenXPos > 0 && screenXPos < WIDTH ) {
             ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} )`;
-            ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), 2, HEIGHT/distance);
+            ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), (17*lineWidthSlider.value)/(100*distance*(fovSlider.value/360)), HEIGHT/distance);
         }
         connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
 

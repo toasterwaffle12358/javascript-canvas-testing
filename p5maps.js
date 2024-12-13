@@ -114,6 +114,7 @@ function map2() {
     
     spritesPosList.push([8, 9, 0])
     spritesPosList.push([7, 2, 1])
+    spritesPosList.push([-4.5,9,2])
 
 
 

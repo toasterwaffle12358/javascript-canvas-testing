@@ -39,6 +39,12 @@
                 </p>
             </div>
             <div class="slider_container">
+                <input type="range" min="1" max="100" value="100" class="slider" id="line_width_slider">
+                <p class="slider_text">
+                    wall line width
+                </p>
+            </div>
+            <div class="slider_container">
                 <input type="range" min="45" max="360" value="100" class="slider" step="5" id="fov_slider" oninput="this.nextElementSibling.nextElementSibling.value = this.value">
                 <br>
                 <output>100</output>
