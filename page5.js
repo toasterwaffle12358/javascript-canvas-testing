@@ -4,6 +4,7 @@ let playerPosition = [6,4]
 
 let pointPosList = []
 let spritesPosList = []
+let floorPosList = []
 
 
 let distance = 0
@@ -66,6 +67,11 @@ function connectSides(screenXPos, pastScreenXPos, distance, pastDistance) {
         ctx.moveTo(pastScreenXPos, (HEIGHT/2)-((HEIGHT/pastDistance)/2));
         ctx.lineTo(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2))
         ctx.stroke()
+    }
+}
+function drawFloor() {
+    for (i in floorPosList) {
+
     }
 }
 
@@ -157,10 +163,10 @@ function drawSides() {
         screenXPos = (((((fovSlider.value/2)+90)-angle))/(fovSlider.value/1))*(WIDTH)
 
         if (screenXPos > 0 && screenXPos < WIDTH ) {
-            ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} )`;
+            ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} /15%)`;
             ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), (17*lineWidthSlider.value)/(100*distance*(fovSlider.value/360)), HEIGHT/distance);
         }
-        connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
+        //connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
 
         
     }

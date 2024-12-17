@@ -115,6 +115,9 @@ function map2() {
     spritesPosList.push([8, 9, 0])
     spritesPosList.push([7, 2, 1])
     spritesPosList.push([-4.5,9,2])
+    for (let i = 0; i < 200; i++) {
+        floorPosList.push([-7, -6+i/50, 1])
+    }
 
 
 

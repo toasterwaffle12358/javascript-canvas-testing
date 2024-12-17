@@ -38,7 +38,7 @@ function updateMousePosition(event) {
 
 function draw() {
     ctx.fillStyle = "rgb(0 0 0 /1%)"
-    ctx.fillRect(0, 0, WIDTH, HEIGHT)
+    //ctx.fillRect(0, 0, WIDTH, HEIGHT)
 
     ctx.fillStyle = "rgb(100 100 100)"
     ctx.fillRect(0, HEIGHT-100, WIDTH, 100)
