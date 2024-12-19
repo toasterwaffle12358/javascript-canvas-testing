@@ -38,7 +38,7 @@ function updateMousePosition(event) {
 
 function draw() {
     ctx.fillStyle = "rgb(0 0 0 /1%)"
-    //ctx.fillRect(0, 0, WIDTH, HEIGHT)
+    ctx.fillRect(0, 0, WIDTH, HEIGHT)
 
     ctx.fillStyle = "rgb(100 100 100)"
     ctx.fillRect(0, HEIGHT-100, WIDTH, 100)
@@ -49,8 +49,8 @@ function draw() {
     
     velocityY += accelerationY
     velocityX += accelerationX
-    velocityX = velocityX*0.999
-    velocityY = velocityY*0.999
+    velocityX = velocityX*0.99999999
+    velocityY = velocityY*0.99999999
     ballX += velocityX
     ballY += velocityY
 
@@ -76,10 +76,10 @@ function draw() {
     
     if (ballY >= HEIGHT-105) {
         ballY = HEIGHT-105
-        velocityY = -velocityY*0.95
-        velocityX = velocityX*0.99
+        velocityY = -velocityY
+        velocityX = velocityX
     }
-    if (ballX > WIDTH-5) {
+    if (ballX >= WIDTH-5) {
         velocityX = -velocityX
         ballX = WIDTH-5
     }
@@ -87,7 +87,7 @@ function draw() {
         velocityX = -velocityX
         ballX = 5
     }
-    if (ballY < 0) {
+    if (ballY <= 0) {
         velocityY = -velocityY
         ballY = 5
     }

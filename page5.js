@@ -15,6 +15,7 @@ let playerViewAngleRads = 0
 let pastDistance = 0
 let pastScreenXPos = 0
 let mouseX = 0
+let keys = []
 
 const currentUrl = new URL(window.location.href);
 //currentUrl.searchParams.set('map', 1);
@@ -245,19 +246,9 @@ function draw() {
     requestAnimationFrame(draw)
 }
 
-
-console.log("distance:")
-console.log(distance)
-console.log("angle:")
-console.log(angle)
-console.log("screen x pos:")
-console.log(screenXPos)
-console.log("player view angle:")
-console.log(playerViewAngle)
-
-
-
+/*
 document.addEventListener('keydown', (event) => {
+
     switch (event.key) {
         case 'Escape' :
             if (isMouseCaptured) {
@@ -297,7 +288,50 @@ document.addEventListener('keydown', (event) => {
             playerPosition[1] += Math.sin(playerViewAngleRads)*0.1
             break
     }
+    if (event.key == Escape) {
+        if (isMouseCaptured) {
+            document.exitPointerLock(); // Exit pointer lock
+        } 
+    }
+    if (event.key == 'ArrowDown') {
+        playerPosition[0] += Math.sin(playerViewAngleRads)*0.1
+        playerPosition[1] += Math.cos(playerViewAngleRads)*0.1
+    }
+
 });
+*/
+
+window.addEventListener("keydown", keysPressed, false);
+window.addEventListener("keyup", keysReleased, false);
+
+function keysPressed(e) {
+    keys[e.keyCode] = true;
+    //left
+    if (keys[37] || keys[65]) {
+        playerPosition[0] += Math.cos(playerViewAngleRads)*0.1
+        playerPosition[1] += -Math.sin(playerViewAngleRads)*0.1
+    }
+    //right
+    if (keys[39] || keys[68]) {
+        playerPosition[0] += -Math.cos(playerViewAngleRads)*0.1
+        playerPosition[1] += Math.sin(playerViewAngleRads)*0.1
+    }
+    //up (forwards)
+    if (keys[38] || keys[87]) {
+        playerPosition[0] += -Math.sin(playerViewAngleRads)*0.1
+        playerPosition[1] += -Math.cos(playerViewAngleRads)*0.1
+    }
+    //down (backwards)
+    if (keys[40] || keys[83]) {
+        playerPosition[0] += Math.sin(playerViewAngleRads)*0.1
+        playerPosition[1] += Math.cos(playerViewAngleRads)*0.1
+    }
+    
+}
+function keysReleased(e) {
+    keys[e.keyCode] = false;
+}  
+
 
 
 canvas.addEventListener('mousemove', (event) => {
