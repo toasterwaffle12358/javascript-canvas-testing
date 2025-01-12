@@ -188,3 +188,19 @@ output {
     color: white;
     padding: 5px;
 }
+.epilepsy_button {
+    display: block;
+    background-color: pink;
+    border-radius: 10px;
+    border-width: 1.5px;
+    border-color: black;
+    border-style: solid;
+    padding: 5px;
+    margin: 5px;
+    max-width: fit-content;
+
+}
+.epilepsy_warning {
+    font-size: 25pt;
+    margin: 10px;
+}

@@ -30,12 +30,19 @@
                 hello
             </div>
         </div>
+        <div class="epilepsy_warning" id="warning">
+            Epilepsy warning: this page contains a lot of bright flashing colors all over the screen,
+            dont continue if you may have photosensitive epilepsy, or if you just dont want to get a headache.
+        </div>
+        <div type="button" onclick="startAnim()" class="epilepsy_button" id="epilepsy_button">
+            continue (I understand there will be bright flashing things all over my screen)
+        </div>
     </div>
     <body>
         <div class="change_mode_button" type="button" id="change_mode_button" onclick="changeMode()">
             CHANGE MODE
         </div>
-        <canvas id="canvas" class="nocursor"></canvas>
+        <canvas id="canvas" ></canvas>
         <script type="text/javascript" src="page3.js"></script>
     </body>
 </html>

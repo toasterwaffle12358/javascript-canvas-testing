@@ -86,5 +86,8 @@ document.addEventListener('touchstart', (event) => {
 canvas.addEventListener('click', function() {
     canvas.requestPointerLock();
 });
-
-requestAnimationFrame(draw)
+function startAnim() {
+    requestAnimationFrame(draw)
+    document.getElementById("epilepsy_button").remove()
+    document.getElementById("warning").remove()
+}
