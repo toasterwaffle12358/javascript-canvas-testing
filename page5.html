@@ -77,6 +77,14 @@
             <div class="slider_container">
                 <button type="button" id="save_canvas" class="menu_button">Save canvas as image</button>
             </div>
+            <div class="slider_container">
+                <input type="range" min="0" max="100" value="90" class="slider" id="wall_opacity_slider" oninput="this.nextElementSibling.nextElementSibling.value = this.value">
+                <br>
+                <output>90</output>
+                <p class="slider_text">
+                    wall opacity
+                </p>
+            </div>
             <div class="slider_container mapselector">
                 <button type="button" id="map1" class="menu_button">map 1</button>
                 <button type="button" id="map2" class="menu_button">map 2</button>

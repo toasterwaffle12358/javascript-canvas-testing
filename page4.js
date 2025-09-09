@@ -12,7 +12,7 @@ let ballX = WIDTH/2
 let ballY = HEIGHT/2
 let pastBallX = WIDTH/2
 let pastBallY = HEIGHT/2
-let accelerationY = 1
+let accelerationY = 0
 let accelerationX = 0
 
 let mouseX = 0
@@ -30,14 +30,14 @@ function updateMousePosition(event) {
     const rect = canvas.getBoundingClientRect();
     mouseX = event.movementX
     mouseY = event.movementY
-    //velocityX = mouseX
-    //velocityY = mouseY
+    velocityX += mouseX/10
+    velocityY += mouseY/10
 }
 
-
+let frictionSlider = document.getElementById('friction_slider')
 
 function draw() {
-    ctx.fillStyle = "rgb(0 0 0 /1%)"
+    ctx.fillStyle = "rgb(0 0 0 /5%)"
     ctx.fillRect(0, 0, WIDTH, HEIGHT)
 
     ctx.fillStyle = "rgb(100 100 100)"
@@ -49,8 +49,8 @@ function draw() {
     
     velocityY += accelerationY
     velocityX += accelerationX
-    velocityX = velocityX*0.99999999
-    velocityY = velocityY*0.99999999
+    velocityX = velocityX*frictionSlider.value/100
+    velocityY = velocityY*frictionSlider.value/100
     ballX += velocityX
     ballY += velocityY
 
@@ -101,6 +101,10 @@ canvas.addEventListener('mousemove', (event) => {
 });
 canvas.addEventListener('mousedown', (event) => {
     ballsList.push([mouseX,mouseY,10,10])
+    velocityX = 10
+    velocityY = 10
+    ballX = mouseX
+    ballY = mouseY
 });
 
 document.addEventListener('keydown', (event) => {
@@ -127,6 +131,9 @@ document.addEventListener('keydown', (event) => {
             accelerationX = 0.5
             break
     }
+});
+canvas.addEventListener('click', function() {
+    canvas.requestPointerLock();
 });
 
 requestAnimationFrame(draw)

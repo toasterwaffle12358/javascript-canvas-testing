@@ -43,6 +43,7 @@ let settingsButton = document.getElementById('settings_button')
 let sensitivitySlider = document.getElementById('sensitivity_slider')
 let viewAngleSlider = document.getElementById('view_angle_override_slider')
 let lineWidthSlider = document.getElementById('line_width_slider')
+let wallAlphaSlider = document.getElementById('wall_opacity_slider')
 let map1Button = document.getElementById('map1')
 let map2Button = document.getElementById('map2')
 let map3Button = document.getElementById('map3')
@@ -164,7 +165,7 @@ function drawSides() {
         screenXPos = (((((fovSlider.value/2)+90)-angle))/(fovSlider.value/1))*(WIDTH)
 
         if (screenXPos > 0 && screenXPos < WIDTH ) {
-            ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} /15%)`;
+            ctx.fillStyle = `rgb( ${distance*100} ${(distance-2)*15} ${1/distance*150} /${wallAlphaSlider.value}%)`;
             ctx.fillRect(screenXPos, (HEIGHT/2)-((HEIGHT/distance)/2), (17*lineWidthSlider.value)/(100*distance*(fovSlider.value/360)), HEIGHT/distance);
         }
         //connectSides(screenXPos, pastScreenXPos, distance, pastDistance)
